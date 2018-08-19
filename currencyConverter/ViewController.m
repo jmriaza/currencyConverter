@@ -21,15 +21,22 @@
 @end
 
 @implementation ViewController
+
 - (IBAction)buttonTapped:(id)sender {
     self.convertButton.enabled = NO;
     self.req = [[CRCurrencyRequest alloc] init];
-    self.currencyA.text = @"A";
-    self.currencyB.text = @"B";
-    self.currencyC.text = @"A";
-    self.convertButton.enabled = YES;
+    self.req.delegate = self;
+    [self.req start];
 }
 
+- (void)
+    currencyRequest:(CRCurrencyRequest *)req
+    retrievedCurrencies:(CRCurrencyResults *)currencies{
+        self.convertButton.enabled = YES;
+    
+    self.currencyA.text = @"Round Trip";
+    
+}
 
 
 
