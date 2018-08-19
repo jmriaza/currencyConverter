@@ -27,16 +27,26 @@
     self.req = [[CRCurrencyRequest alloc] init];
     self.req.delegate = self;
     [self.req start];
+    [self.view endEditing:YES];
 }
 
 - (void)
     currencyRequest:(CRCurrencyRequest *)req
     retrievedCurrencies:(CRCurrencyResults *)currencies{
         self.convertButton.enabled = YES;
+    double inputValue = [self.inputField.text floatValue];
     
-    self.currencyA.text = @"Round Trip";
+    double euroValue = inputValue * currencies.EUR;
+    double yenValue = inputValue * currencies.JPY;
+    double gbpValue = inputValue * currencies.GBP;
+
+    NSString * tempEuro = [NSString stringWithFormat:@"%.2f", euroValue];
+    NSString * tempYen = [NSString stringWithFormat:@"%.2f", yenValue];
+    NSString * tempGbp = [NSString stringWithFormat:@"%.2f", gbpValue];
     
-}
+    self.currencyA.text = tempEuro;
+    self.currencyB.text = tempYen;
+    self.currencyC.text = tempGbp;}
 
 
 
